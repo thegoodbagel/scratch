@@ -1,0 +1,27 @@
+Vim has several modes:
+	1) Normal	Default, for navigation & simple editing
+	2) Insert	For modifying text
+	3) Command Line	For saving, exiting, etc.
+Others:	Visual, Select, Ex-Mode, etc.
+
+To switch to Normal mode, hit Esc
+To switch to Command Line mode from Normal mode, press the colon
+:q! or ZQ quits the Vim editor without saving
+:x! or :wq saves the file then closes it
+
+To navigate around a file, you can use the arrow keys.
+In Normal mode, :set number sets line numbers on the left side of each line
+:<a number> moves to the the specified line 
+:$ moves to the last line
+$ moves to the end of a line
+
+dd is delete
+u is undo
+
+v and move left/right arrows to select and deselect text
+y enters 'yank' mode, and copies text to clipboard
+o creates a new line underneath and enters Insert mode
+p is paste
+
+To search for a word, enter :/<search keyword>
+n is next

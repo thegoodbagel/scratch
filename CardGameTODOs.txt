@@ -1,0 +1,4 @@
+bugs:
+- run with npx node-gyp rebuild
+- Card class doesn't define an equality operator (operator==), but code tries to compare Card objects in std::remove() and std::find()
+
