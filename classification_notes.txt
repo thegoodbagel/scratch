@@ -46,4 +46,9 @@ Six common classification algorithms:
 * Benefits of random forest include better generalization (less overfitting), handles high dimensions well, but is slower
 
 --- Support Vector Machines ---
-*  
+* Tries to separate data in classes as much as possible by finding hyperplane with largest possible margin
+* Uses 'kernel trick' for non-linear datasets
+
+--- Naive Bayes ---
+* Assumes all features are independent given class C
+  
