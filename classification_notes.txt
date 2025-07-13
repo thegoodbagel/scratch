@@ -7,6 +7,10 @@ Six common classification algorithms:
 5) Naive Bayes
 6) K-Nearest Neighbors (KNN)
 
+--- Logistic Regression ---
+* Uses sigmoid function to generate probabilistic output
+* Trained using log likelihood
+
 --- Decision Tree ---
 * Training phase: building best tree (high accuracy, avoid overfitting)
 * Splits data recursively
@@ -28,3 +32,18 @@ Six common classification algorithms:
 	-> = -Sum over splits(S_j/S log(S_j/S)
 	-> Low when split is balanced, high when split is uneven
 	-> Acts as penalty over splitting too much into attributes with many values
+
+
+--- Random Forest ---
+* Collection of decision trees, where each tree is trained on random subset of data and features
+* At prediction time, an 'average' of votes is taken
+
+* Bootstrap Aggregating (Bagging) is used to generate different training data sets, creating variation between trees
+	-> Repeatedly samples randomly with replacement from training set
+* Instead of considering all features, RF randomly selects a subset of features 
+	-> Trees are less correlated
+* Once all trees are built, each tree predicts and class and a majority vote is taken
+* Benefits of random forest include better generalization (less overfitting), handles high dimensions well, but is slower
+
+--- Support Vector Machines ---
+*  
