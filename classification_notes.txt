@@ -1,0 +1,30 @@
+Six common classification algorithms:
+
+1) Logistic Regression
+2) Decision Tree
+3) Random Forest
+4) Support Vector Machine (SVM)
+5) Naive Bayes
+6) K-Nearest Neighbors (KNN)
+
+--- Decision Tree ---
+* Training phase: building best tree (high accuracy, avoid overfitting)
+* Splits data recursively
+* To determine best split, can use following metrics:
+	- Gini Impurity
+	- Information Gain
+	- Gain Ratio
+
+* Formula for Gini Impurity: 
+	-> Calculate for each class: 1 - Sum(p_i^2)
+	-> p_i is proportion ofclass i in pool 
+	-> lower the better
+* Formula for Entropy and Information Gain:
+	-> Entropy = - Sum over each class(p log(p))
+	-> Information Gain = how much entropy decreases after a split = Entropy(parent) - sum of Entropy of children
+* Formula for Gain Ratio:
+	-> Penalizes splits that creates many small branches: Information Gain / Split Information
+	-> Split Information = how 'even' the data is split across branches
+	-> = -Sum over splits(S_j/S log(S_j/S)
+	-> Low when split is balanced, high when split is uneven
+	-> Acts as penalty over splitting too much into attributes with many values
