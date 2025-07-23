@@ -1,0 +1,46 @@
+Billion-scale similarity search with GPUs, Faiss
+https://arxiv.org/pdf/1702.08734
+
+Abstract
+	- Big Picture: use GPU to handle vector database systems
+	- Bottlenecks: algorithms that expose less parallelism or memory hierarchy that GPU can take advantage of
+	- Solution: faster k-selection design, faster nearest neighbor implementation
+	
+Introduction
+	- Metadata for images & videos to index & search is not often available -> ML & DL algorithms are used to interpret & classify data
+	- data embeddings are usually real-value, high-dimensional vectors
+	- search by numerical similarity
+	- expensive operation: computing k-NN graph
+		- directed graph
+		- each vector is node
+		- each edge connects node to k nearest neighbors
+	- state-of-the-art methods like NN-Descent are too memory intensive
+	- issues: curse of dimensionality
+	- approaches:
+		- internal compressed reprentation of vectors
+			- good for memory-limited devices like GPUs
+			- ex. binary codes, quantization methods
+	- paper focuses on product quantization -based codes 
+		- original: IVFADC
+		- most new improvements difficult to implement efficiently on GPU
+	- paper makes contributions:
+		- GPU k-selection algorithm
+		- k-nearest neighbor search on GPU
+		- experimental evidence
+Problem Statement
+	- query vector: x
+	- collection: y_i, 0 <= i <= l
+	- look for: k nearest neighbors of x in terms of L2 distance
+
+	Batching
+	- searches usually performed in batches of n_q query vectors in parallel
+	Exact Search
+	- use decomposition: x^2+y^2-2x.y -> bottleneck on third term = XY*
+	Compressed-domain search
+	- focus on ANN search
+	- consider IVFADC indexing structure
+		- y encoded as q(y)=q_1(y) + q2_(y-q_1(y)) (q_1 and q_2 are quantizers)
+			- q_1 is coarse quantizer
+			- q_2 is coarse quantizer
+		- Vectors are preselected based on first-level quantizer
+			- multi-probe parameter T is number of coarse-level centroids we consider
