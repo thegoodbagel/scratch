@@ -5,4 +5,7 @@ SELECT column FROM table...
 	= value
 	IN (list of scalar values)
 	BETWEEN val1 AND val2
-	LIKE value
+	LIKE simple_wildcard
+		% = any number of characters
+		_ = exactly one character
+
