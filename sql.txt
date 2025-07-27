@@ -8,4 +8,23 @@ SELECT column FROM table...
 	LIKE simple_wildcard
 		% = any number of characters
 		_ = exactly one character
+	> (SELECT ...)
+	is NULL
+  ORDER BY column
+
+SELECT SUM(column) FROM table
+SELECT DISTINCT(column) FROM table
+SELECT COUNT(column) FROM table
+
+SELECT val1, COUNT(val2) FROM table
+  GROUP BY val1
+SELECT val1, SUM(column) FROM table
+  GROUP by val1
+
+
+SELECT * FROM table...
+  * = all columns
+
+SELECT * FROM table1 JOIN table2 ON (column1=columns2)
+
 
