@@ -1,4 +1,4 @@
-Billion-scale similarity search with GPUs, Faiss
+Billion-scale similarity search with GPUs, Fais
 https://arxiv.org/pdf/1702.08734
 
 Abstract
@@ -44,3 +44,18 @@ Problem Statement
 			- q_2 is coarse quantizer
 		- Vectors are preselected based on first-level quantizer
 			- multi-probe parameter T is number of coarse-level centroids we consider
+		- Does another search based on based on q(y) on subset of vectors
+		- data structure: inverted file
+			- groups vectors into inverted lists (each with same q_1)
+		- bottleneck: linearly scanning T lists
+	Quantizers
+		- q_1: relatively low number of repeat values
+		- q_2: can have longer codes
+	Product quantizer:
+		- use on q2
+		- splits y into b sub-vectors
+		- each sub-vector quantized with own quantizer
+		- quantization value is concatenation of sub-vectors
+
+GPU: Overview and K-Selection
+	- 

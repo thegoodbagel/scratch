@@ -1,0 +1,8 @@
+SQL Fundamentals
+----------------------------------------------------------------
+SELECT column FROM table...
+  WHERE column 
+	= value
+	IN (list of scalar values)
+	BETWEEN val1 AND val2
+	LIKE value
