@@ -1,0 +1,60 @@
+Pandas Basics
+
+Purpose: data analysis in Python
+-> like SQL, table-based
+
+import pandas as pd
+df = pd.read_csv("dataset.csv")
+
+df.head()	# Returns dataframe of first 5 rows
+
+   id   species   weight  price
+0   1    salmon    150.0   5.99
+1   2     tuna     200.0   6.49
+2   3  mackerel   120.0    4.99
+3   4   salmon    180.0    6.29
+4   5     eel     160.0    7.49
+
+df.info()	# Prints summary to console
+
+RangeIndex: 100 entries, 0 to 98
+Data columns (total 4 columns):
+ #   Column   Non-Null Count  Dtype  
+---  ------   --------------  -----  
+ 0   id       100 non-null    int64  
+ 1   species  98 non-null     object 
+ 2   weight   100 non-null    float64
+ 3   price    100 non-null    float64
+dtypes: float64(2), int64(1), object(1)
+
+df.describe()	# Returns DF of column summary
+             id     weight      price
+count  100.0000  100.00000  100.00000
+mean    50.5000  155.30000    6.20000
+std     29.0115   25.12001    1.25000
+min      1.0000  110.00000    4.50000
+25%     25.7500  140.00000    5.30000
+50%     50.5000  155.00000    6.10000
+75%     75.2500  170.00000    7.00000
+max    100.0000  200.00000    8.50000
+
+df["column_name"]		# Single column
+df[["column1", "column2"]]	# Multiple columns
+
+df[df["column"] == "target"]	# Filter rows
+
+df["price_per_gram"] = df["price"] / df["weight"]
+df["species"] = df["species"].str.lower()
+
+df = df.dropna(subset=["species"])	# Drop rows with missing values
+df = df.fillna(0)		# Fill empties with 0
+
+df.groupby("species")["price"].mean()	# Mean price per species
+ef.to_csv("cleaned_data.csv", index=False)
+
+
+df.loc["row_label", "col_label"]
+df.iloc[3, 1]
+
+Vectorized Operations:
+df["x_plus_1"] = df["x"] + 1
