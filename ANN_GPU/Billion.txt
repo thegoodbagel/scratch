@@ -58,4 +58,36 @@ Problem Statement
 		- quantization value is concatenation of sub-vectors
 
 GPU: Overview and K-Selection
-	- 
+Architecture
+	- Nvidia GPU: general-purpose computer
+	- warp: CUDA threads, 32-wide vector
+	- lanes: individual threads in warp
+		- lane ID: from 0-31
+	- warp divergence: warp lanes taking different execution paths
+	- block/cooperative thread array (CTA): user-configurable collection of 1-32 warps
+	- shared memory: each block has up to 48 KiB
+		- thread id: block-relative ID for each CUDA thread
+	- streaming multiprocessor (SM): single core that block runs on
+	- functional units: of SM includes ALUs, memory load/store, etc.
+	- grid: group of blocks
+		- each block assigned grid relative ID
+	- kernel: unit of work scheduled by host CPU for GPU to execute
+	- streams/events: ordering primitives that control kernel ordering
+	- occupancy: of GPU is affected by:
+		- number of blocks executing (depends on shared memory and register resources per block)
+		- per-CUDA thread register determined at compilation time
+		- shared memory usage can be chosen at runtime
+	- global memory: how different blocks and kernels can communicate
+
+Register file
+	- shared and register tradeoff: lower occupancy but can increase performance (good)
+	- warp shuffle instruction: allows lanes in GPU to exchange register data
+	- lane-stride register array: common pattern to achieve above
+
+k-selection
+	- bottleneck: multiple passes over input
+	- CPU solution: selection via max-heap
+		- little data parallelism
+
+Fast k-selection on GPU
+
