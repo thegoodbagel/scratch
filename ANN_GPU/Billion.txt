@@ -90,4 +90,37 @@ k-selection
 		- little data parallelism
 
 Fast k-selection on GPU
+- roofline performance model: memory or arithmetic throughput should be limiting factor
+- in-register sorting primitive
+	- Bitonic sort
+- WarpSelect
+	- entire state in registers
+	- single pass over data
+	- avoids cross-warp synchronization
+- thread queue in each lane, stores t elements in registers
+- warp queue for each warp
+- invariants:
+	- largest element of thread q is not in min-k
+	- largest element of each thread is greater than all warp queue keys
+	- all a_i seen so far in min-k are in some lane's thread queue or in warp queue
+- Lane j receives new element, attempts to insert in thread queue - if greater than greatest elem, then too large and can be rejected
+- Otherwise reject previous greatest element, insert in thread queue
+- Use warp ballot instruction to see if lane has violated second invariant 
+	- If has, warp uses ODD-MERGE to merge and sort thread and warp queues together
+- parallel instructions for each 32 elements
+	- read 32 elements, compare to thread heads
+	- perform insertion sort
+	- sort and merge queues
+
+Computation Layout
+- distance computation: matrix multiplication
+- computing the PQ with lookup tables: 256 * d multiply-adds and n * b lookup-adds
+- GPU Implementation
+	- inverted lists stored as two separate arrays
+	- kernel responsible for scanning T closest inverted lists for each query + calclating vector pair distances with lookup table
+	- Each pair of query in list can be processed independently -> assigned to each block
+- Multi-GPU parallelism
+	- Replication
+	- Sharding
+
 
