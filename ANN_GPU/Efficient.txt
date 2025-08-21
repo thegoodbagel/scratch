@@ -17,6 +17,8 @@ Efficient and robust approximate nearest neighbor search using Hierarchical Navi
 	-> explicit selection of graph's entry-point node
 	-> separation of links by different scales
 	-> advance dheuristic to select neighbors
+
+2) Related Works
 Proximity graph techniques
 - greeding routing in k-NN graphs
 - given graph, start at enter point and iteratively traverse the graph
@@ -31,5 +33,20 @@ Drawbacks:
 	- built via consecutive insertion of elements in random order
 	- bidirectionally connecting them to M closest neighbors inserted earlier -> connectivity
 	- construction can be efficiently parallelized
+	- works badly on low dimensional datasets
+-> navigable small world networks: logarithmic scaling of greedy graph routing
+	- have to know data distribution beforehand
+	- scalability not great
+-> scale-gree models
+	- bad power law complexity
 
+3) Motivation
+- two phases of routing process:
+	1) 'zoom out'
+		- start from low degree node
+		- traverse graph, increasing node's degree
+		- until radius of node links reaches scale of distance to query
+	2) 'zoom-in'
+		- start search from node with maximum degree
+		- separate into layers
 
